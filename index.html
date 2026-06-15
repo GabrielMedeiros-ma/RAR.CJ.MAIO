@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Controladoria - Maio 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#f0fdfa', 100: '#ccfbf1', 500: '#14b8a6', 600: '#0d9488', 900: '#134e4a', 950: '#042f2e' },
+                        slate: { 850: '#152033' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f8fafc; }
+        .tab-btn { transition: all 0.2s ease-in-out; }
+        .tab-btn.active { background-color: #14b8a6; color: white; border-color: #14b8a6; }
+        .section-content { display: none; animation: fadeIn 0.4s ease-out; }
+        .section-content.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Navbar/Header -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-lg border-b border-slate-700">
+        <div class="max-w-[1600px] mx-auto px-4 lg:px-8 py-4 flex flex-col lg:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-brand-500 text-white p-2 rounded-lg"><i class="fa-solid fa-chart-line text-xl"></i></div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight uppercase leading-tight">Controladoria</h1>
+                    <p class="text-xs text-brand-100 font-medium">Relatório Executivo • MAIO 2026</p>
+                </div>
+            </div>
+            
+            <nav class="flex overflow-x-auto w-full lg:w-auto custom-scrollbar pb-2 lg:pb-0 gap-2 text-xs font-semibold uppercase tracking-wider">
+                <button onclick="switchTab('parecer')" class="tab-btn active px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-parecer">Parecer</button>
+                <button onclick="switchTab('protocolo')" class="tab-btn px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-protocolo">Protocolo</button>
+                <button onclick="switchTab('correspondente')" class="tab-btn px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-correspondente">Correspondente</button>
+                <button onclick="switchTab('pauta')" class="tab-btn px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-pauta">Pauta</button>
+                <button onclick="switchTab('serasa')" class="tab-btn px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-serasa">Serasa Corresp</button>
+                <button onclick="switchTab('cadastro')" class="tab-btn px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-cadastro">Cadastro</button>
+                <button onclick="switchTab('encerramento')" class="tab-btn px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-encerramento">Encerramento</button>
+                <button onclick="switchTab('acordo')" class="tab-btn px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-acordo">Acordos</button>
+                <button onclick="switchTab('andamento')" class="tab-btn px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-andamento">Andamento</button>
+                <button onclick="switchTab('pa')" class="tab-btn px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-pa">PA</button>
+                <button onclick="switchTab('pagamento')" class="tab-btn px-4 py-2 rounded-md border border-slate-700 hover:bg-slate-800 whitespace-nowrap" id="tab-pagamento">Pagamento</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow w-full max-w-[1600px] mx-auto p-4 lg:p-8">
+
+        <!-- ================= PARECER ================= -->
+        <section id="parecer" class="section-content active space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-file-signature text-2xl text-blue-600"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Núcleo Parecer</h2>
+            </div>
+
+            <!-- Resumo -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-blue-500">
+                    <p class="text-sm font-semibold text-slate-500 uppercase">Pareceres Realizados</p>
+                    <p class="text-3xl font-black text-slate-800 mt-1">2.911</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-rose-500">
+                    <p class="text-sm font-semibold text-slate-500 uppercase">Em Atraso</p>
+                    <p class="text-3xl font-black text-rose-600 mt-1">135</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-amber-500">
+                    <p class="text-sm font-semibold text-slate-500 uppercase">Agendados c/ Desvio</p>
+                    <p class="text-3xl font-black text-amber-600 mt-1">4</p>
+                </div>
+            </div>
+
+            <!-- Detalhamento Clientes -->
+            <h3 class="text-lg font-bold text-slate-800 mt-8 mb-4 border-b pb-2">Detalhamento por Cliente</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-sm border border-yellow-200 overflow-hidden">
+                    <div class="bg-yellow-50 p-4 border-b border-yellow-100 flex justify-between items-center">
+                        <span class="font-bold text-yellow-800">Mercado Livre</span>
+                        <span class="text-xs font-bold bg-yellow-200 text-yellow-900 px-2 py-1 rounded">SLA: 48h</span>
+                    </div>
+                    <div class="p-4 space-y-3 text-sm">
+                        <p class="flex justify-between border-b pb-1"><span>Fora do prazo:</span> <strong class="text-rose-600">118</strong></p>
+                        <p class="text-xs text-slate-600 italic border-b pb-1">Justificativa: Ausência de senhas.</p>
+                        <p class="flex justify-between border-b pb-1"><span>Casos c/ desvio:</span> <strong>3</strong></p>
+                        <div>
+                            <p class="font-semibold text-xs text-slate-500 uppercase mb-1 mt-2">Agendamentos não direcionados:</p>
+                            <ul class="text-xs space-y-1">
+                                <li>MIMM (Milena Medeiros Mendes) → 1</li>
+                                <li>LOSS (Luanny de Oliveira) → 1</li>
+                                <li>JMS (Jefferson Luiz Mendonça) → 1</li>
+                            </ul>
+                        </div>
+                        <p class="text-xs font-bold text-green-600 pt-2">ERROS DE AGENDAMENTO: 0</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-red-200 overflow-hidden">
+                    <div class="bg-red-50 p-4 border-b border-red-100 flex justify-between items-center">
+                        <span class="font-bold text-red-800">Bradesco</span>
+                        <span class="text-xs font-bold bg-red-200 text-red-900 px-2 py-1 rounded">SLA: 48h</span>
+                    </div>
+                    <div class="p-4 space-y-3 text-sm h-full">
+                        <p class="flex justify-between border-b pb-1"><span>Fora do prazo:</span> <strong class="text-green-600">0</strong></p>
+                        <p class="flex justify-between border-b pb-1"><span>Casos c/ desvio:</span> <strong>1</strong></p>
+                        <div>
+                            <p class="font-semibold text-xs text-slate-500 uppercase mb-1 mt-2">Agendamentos não direcionados:</p>
+                            <ul class="text-xs space-y-1">
+                                <li>GMF (Gabriela Miranda de França) → 1</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-pink-200 overflow-hidden">
+                    <div class="bg-pink-50 p-4 border-b border-pink-100 flex justify-between items-center">
+                        <span class="font-bold text-pink-800">Serasa</span>
+                        <span class="text-xs font-bold bg-pink-200 text-pink-900 px-2 py-1 rounded">SLA: 24h</span>
+                    </div>
+                    <div class="p-4 space-y-3 text-sm">
+                        <p class="flex justify-between border-b pb-1"><span>Fora do prazo:</span> <strong class="text-rose-600">17</strong></p>
+                        <p class="text-xs text-slate-600 italic border-b pb-1">Justificativa: não tem. Funcionária em treinamento.</p>
+                        <div>
+                            <p class="font-semibold text-xs text-rose-500 uppercase mt-2 mb-1">ERROS DE AGENDAMENTO: 1</p>
+                            <p class="text-[11px] bg-slate-50 p-2 rounded border">0034447-88.2026.8.05.0001 / 12/05/2026 / SERASA / SIGLA: VPB<br><strong class="text-rose-600">ERRO:</strong> Sentença do ED proferida apenas em relação ao corréu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produtividade -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mt-6">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Produtividade do Time</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-bold text-brand-600">EJSI</p>
+                            <span class="text-[10px] font-bold bg-brand-100 text-brand-800 px-2 py-1 rounded">Média: 74/dia</span>
+                        </div>
+                        <p class="text-2xl font-black text-slate-800">1.461 <span class="text-xs font-normal text-slate-500 uppercase">Pareceres</span></p>
+                        <p class="text-xs text-slate-500 mt-2">Menor complexidade. Extra pauta de 72 solic. de reembolso do Cetelem.</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-bold text-brand-600">TMSM</p>
+                            <span class="text-[10px] font-bold bg-brand-100 text-brand-800 px-2 py-1 rounded">Média: 26/dia</span>
+                        </div>
+                        <p class="text-2xl font-black text-slate-800">510 <span class="text-xs font-normal text-slate-500 uppercase">Pareceres</span></p>
+                        <p class="text-xs text-slate-500 mt-2">Realizou protocolos de obp's e obf's.</p>
+                    </div>
+                    <div class="bg-rose-50 p-4 rounded-lg border border-rose-200">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-bold text-rose-700">LVAC <i class="fa-solid fa-triangle-exclamation ml-1" title="Solicitou Desligamento"></i></p>
+                            <span class="text-[10px] font-bold bg-rose-200 text-rose-900 px-2 py-1 rounded">Média: 31/dia</span>
+                        </div>
+                        <p class="text-2xl font-black text-slate-800">606 <span class="text-xs font-normal text-slate-500 uppercase">Pareceres</span></p>
+                        <p class="text-[11px] text-slate-600 mt-2">Extra pauta protocolos defesas Meli/externo/e-mail.</p>
+                        <p class="text-xs font-black text-rose-700 mt-1 uppercase">Solicitou Desligamento</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-bold text-brand-600">PAB</p>
+                            <span class="text-[10px] font-bold bg-brand-100 text-brand-800 px-2 py-1 rounded">Média: 13/dia</span>
+                        </div>
+                        <p class="text-2xl font-black text-slate-800">243 <span class="text-xs font-normal text-slate-500 uppercase">Pareceres</span></p>
+                        <p class="text-xs text-slate-500 mt-2">Extra pauta protocolos obp's, obf's, subs e carta.</p>
+                    </div>
+                    <div class="bg-rose-50 p-4 rounded-lg border border-rose-200">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-bold text-rose-700">AGB <i class="fa-solid fa-triangle-exclamation ml-1" title="Solicitou Desligamento"></i></p>
+                            <span class="text-[10px] font-bold bg-rose-200 text-rose-900 px-2 py-1 rounded">Média: 5/dia</span>
+                        </div>
+                        <p class="text-2xl font-black text-slate-800">91 <span class="text-xs font-normal text-slate-500 uppercase">Pareceres</span></p>
+                        <p class="text-[11px] text-slate-600 mt-2">Suporte localização pastas fav. Cetelem e protocolos email.</p>
+                        <p class="text-xs font-black text-rose-700 mt-1 uppercase">Solicitou Desligamento</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PROTOCOLO ================= -->
+        <section id="protocolo" class="section-content space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-layer-group text-2xl text-indigo-600"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Núcleo Protocolo</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 flex justify-between items-center shadow-sm">
+                    <div>
+                        <p class="text-sm font-bold text-indigo-900 uppercase">Via Trello</p>
+                        <p class="text-4xl font-black text-indigo-700">1.491</p>
+                    </div>
+                    <i class="fa-brands fa-trello text-5xl text-indigo-200"></i>
+                </div>
+                <div class="bg-slate-100 p-6 rounded-2xl border border-slate-200 flex justify-between items-center shadow-sm">
+                    <div>
+                        <p class="text-sm font-bold text-slate-600 uppercase">Via E-mail</p>
+                        <p class="text-4xl font-black text-slate-700">88</p>
+                    </div>
+                    <i class="fa-regular fa-envelope text-5xl text-slate-300"></i>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 lg:col-span-2">
+                    <h3 class="text-sm font-bold text-slate-800 mb-4 uppercase border-b pb-2"><i class="fa-brands fa-trello mr-2 text-indigo-500"></i>Produtividade Trello</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                        <div class="p-3 bg-slate-50 rounded-lg"><p class="font-bold text-slate-800">ACAN</p><p class="text-xl font-black text-indigo-600">636</p></div>
+                        <div class="p-3 bg-slate-50 rounded-lg"><p class="font-bold text-slate-800">PAB</p><p class="text-xl font-black text-indigo-600">378</p></div>
+                        <div class="p-3 bg-slate-50 rounded-lg"><p class="font-bold text-slate-800">LVAC</p><p class="text-xl font-black text-indigo-600">133</p></div>
+                        <div class="p-3 bg-slate-50 rounded-lg"><p class="font-bold text-slate-800">EJSI</p><p class="text-xl font-black text-indigo-600">125</p></div>
+                        <div class="p-3 bg-slate-50 rounded-lg"><p class="font-bold text-slate-800">WEM</p><p class="text-xl font-black text-indigo-600">105</p></div>
+                        <div class="p-3 bg-slate-50 rounded-lg"><p class="font-bold text-slate-800">TMSM</p><p class="text-xl font-black text-indigo-600">52</p></div>
+                        <div class="p-3 bg-slate-50 rounded-lg"><p class="font-bold text-slate-800">AGB</p><p class="text-xl font-black text-indigo-600">40</p></div>
+                        <div class="p-3 bg-slate-50 rounded-lg"><p class="font-bold text-slate-800">TMAS</p><p class="text-xl font-black text-indigo-600">22</p></div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-sm font-bold text-slate-800 mb-4 uppercase border-b pb-2"><i class="fa-regular fa-envelope mr-2 text-slate-500"></i>Produtividade E-mail</h3>
+                        <div class="flex justify-between items-center mb-2"><span>LVAC (Leandra):</span> <strong class="text-lg">82</strong></div>
+                        <div class="flex justify-between items-center"><span>AGB (Alisson):</span> <strong class="text-lg">6</strong></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-emerald-500">
+                        <h3 class="text-sm font-bold text-slate-800 mb-4 uppercase border-b pb-2"><i class="fa-solid fa-shield-halved mr-2 text-emerald-500"></i>Defesas Externo</h3>
+                        <div class="flex justify-between items-center mb-2"><span>LVAC:</span> <strong class="text-lg">204</strong></div>
+                        <div class="flex justify-between items-center"><span>WEM:</span> <strong class="text-lg">158</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= CORRESPONDENTES ================= -->
+        <section id="correspondente" class="section-content space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-users-gear text-2xl text-amber-600"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Núcleo Correspondentes</h2>
+            </div>
+
+            <!-- Resumo Auds -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Audiências</p>
+                    <p class="text-3xl font-black text-slate-800 mt-2">2.707</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Aud. Virtual</p>
+                    <p class="text-3xl font-black text-blue-600 mt-2">1.891</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Aud. Presencial</p>
+                    <p class="text-3xl font-black text-amber-600 mt-2">816</p>
+                </div>
+                <div class="bg-slate-800 p-5 rounded-xl shadow-sm text-center">
+                    <p class="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Valor Total Aud.</p>
+                    <p class="text-2xl font-black text-emerald-400 mt-2">R$ 220.875</p>
+                </div>
+            </div>
+
+            <!-- Protocolos e UF -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Prot. Subs / Cartas Preposição</h3>
+                    <p class="text-3xl font-black text-slate-800 mb-4">3.044</p>
+                    <div class="space-y-3">
+                        <div class="bg-rose-50 p-3 rounded border border-rose-100 text-sm">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-rose-800">WEM <i class="fa-solid fa-triangle-exclamation text-xs ml-1" title="Solicitou Desligamento"></i></span>
+                                <span class="font-black">1.546</span>
+                            </div>
+                            <p class="text-[10px] text-rose-600 font-bold uppercase">78/dia • Solicitou Desligamento</p>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-100 text-sm flex justify-between items-center">
+                            <span class="font-bold text-slate-700">PAB</span>
+                            <span class="font-black">1.498 <span class="text-[10px] text-slate-500 font-normal ml-1">(74/dia)</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 lg:col-span-2">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Top 10 Audiências por UF</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-slate-100 border border-slate-200 px-3 py-2 rounded-lg text-sm font-bold">BA: <span class="text-brand-600">835</span></span>
+                        <span class="bg-slate-100 border border-slate-200 px-3 py-2 rounded-lg text-sm font-bold">RJ: <span class="text-brand-600">429</span></span>
+                        <span class="bg-slate-100 border border-slate-200 px-3 py-2 rounded-lg text-sm font-bold">MG: <span class="text-brand-600">264</span></span>
+                        <span class="bg-slate-100 border border-slate-200 px-3 py-2 rounded-lg text-sm font-bold">SP: <span class="text-brand-600">191</span></span>
+                        <span class="bg-slate-100 border border-slate-200 px-3 py-2 rounded-lg text-sm font-bold">CE: <span class="text-brand-600">163</span></span>
+                        <span class="bg-slate-100 border border-slate-200 px-3 py-2 rounded-lg text-sm font-bold">MA: <span class="text-brand-600">113</span></span>
+                        <span class="bg-slate-100 border border-slate-200 px-3 py-2 rounded-lg text-sm font-bold">PE: <span class="text-brand-600">100</span></span>
+                        <span class="bg-slate-100 border border-slate-200 px-3 py-2 rounded-lg text-sm font-bold">PB: <span class="text-brand-600">60</span></span>
+                        <span class="bg-slate-100 border border-slate-200 px-3 py-2 rounded-lg text-sm font-bold">AL: <span class="text-brand-600">60</span></span>
+                        <span class="bg-slate-100 border border-slate-200 px-3 py-2 rounded-lg text-sm font-bold">SE: <span class="text-brand-600">55</span></span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-3 font-medium">Outros: GO(45), RS(32), ES(31), PA(26), PR(24), AM(23), RR(17), MT(16), MS(16), TO(15), RO(13), DF(10), AC(6), SC(4), AP(1).</p>
+                </div>
+            </div>
+
+            <!-- Tabela Clientes & Diligências -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2"><i class="fa-solid fa-list mr-2"></i>Audiências por Cliente</h3>
+                    <div class="overflow-x-auto custom-scrollbar flex-grow max-h-[400px]">
+                        <table class="w-full text-left text-xs whitespace-nowrap">
+                            <thead class="bg-slate-50 sticky top-0">
+                                <tr>
+                                    <th class="p-2 font-bold text-slate-600 uppercase">Cliente</th>
+                                    <th class="p-2 font-bold text-slate-600 uppercase text-center">Pres. (Qtd/R$)</th>
+                                    <th class="p-2 font-bold text-slate-600 uppercase text-center">Virt. (Qtd/R$)</th>
+                                    <th class="p-2 font-bold text-slate-600 uppercase text-right">Total (R$)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50"><td class="p-2 font-bold">Nubank</td><td class="p-2 text-center">342 / 57.960</td><td class="p-2 text-center">788 / 31.910</td><td class="p-2 text-right font-bold text-emerald-600">90.420</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="p-2 font-bold">Mercado Livre</td><td class="p-2 text-center">290 / 50.350</td><td class="p-2 text-center">568 / 23.430</td><td class="p-2 text-right font-bold text-emerald-600">75.480</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="p-2 font-bold">Serasa</td><td class="p-2 text-center">84 / 12.365</td><td class="p-2 text-center">372 / 15.550</td><td class="p-2 text-right font-bold text-emerald-600">30.245</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="p-2 font-bold">iFood</td><td class="p-2 text-center">33 / 5.520</td><td class="p-2 text-center">42 / 1.690</td><td class="p-2 text-right font-bold text-emerald-600">7.410</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="p-2 font-bold">Cetelem</td><td class="p-2 text-center">16 / 2.630</td><td class="p-2 text-center">14 / 560</td><td class="p-2 text-right font-bold text-emerald-600">3.800</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="p-2 font-bold">Buser</td><td class="p-2 text-center">12 / 2.040</td><td class="p-2 text-center">19 / 760</td><td class="p-2 text-right font-bold text-emerald-600">3.100</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="p-2 font-bold">Grupo Eurovia</td><td class="p-2 text-center">10 / 1.050</td><td class="p-2 text-center">19 / 610</td><td class="p-2 text-right font-bold text-emerald-600">2.170</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="p-2 font-bold">Bradesco</td><td class="p-2 text-center">6 / 830</td><td class="p-2 text-center">30 / 1.200</td><td class="p-2 text-right font-bold text-emerald-600">2.030</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="p-2 font-bold">Mova</td><td class="p-2 text-center">6 / 1.180</td><td class="p-2 text-center">15 / 600</td><td class="p-2 text-right font-bold text-emerald-600">1.980</td></tr>
+                                <tr class="hover:bg-slate-50"><td class="p-2 font-bold text-slate-500">Outros <span class="font-normal">(Jaguar, Solfácil, Inbursa...)</span></td><td class="p-2 text-center">-</td><td class="p-2 text-center">-</td><td class="p-2 text-right text-slate-500 font-bold">Diversos</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2"><i class="fa-solid fa-map-location-dot mr-2"></i>Diligências</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+                        <div class="bg-slate-50 p-2 rounded text-center border border-slate-100">
+                            <p class="text-xl font-black text-slate-800">81</p>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase">Total Qtd</p>
+                        </div>
+                        <div class="bg-slate-50 p-2 rounded text-center border border-slate-100">
+                            <p class="text-xl font-black text-emerald-600">6.960</p>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase">Valor (R$)</p>
+                        </div>
+                        <div class="bg-slate-50 p-2 rounded text-center border border-slate-100 col-span-2 sm:col-span-2 flex flex-col justify-center">
+                            <p class="text-[10px] font-bold text-slate-600">Despachos: R$ 3.095 (32)</p>
+                            <p class="text-[10px] font-bold text-slate-600">Emissão Guia: R$ 1.820 (21)</p>
+                            <p class="text-[10px] font-bold text-slate-600">Cópias: R$ 1.470 (20) | Prot: R$ 575 (8)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto custom-scrollbar flex-grow max-h-[280px]">
+                        <table class="w-full text-left text-xs whitespace-nowrap">
+                            <thead class="bg-slate-50 sticky top-0">
+                                <tr>
+                                    <th class="p-2 font-bold text-slate-600">Cliente</th>
+                                    <th class="p-2 font-bold text-slate-600 text-center">Qtd</th>
+                                    <th class="p-2 font-bold text-slate-600 text-right">Valor (R$)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr><td class="p-2 font-semibold">Serasa</td><td class="p-2 text-center">32</td><td class="p-2 text-right font-bold text-slate-700">2.330</td></tr>
+                                <tr><td class="p-2 font-semibold">Mercado Livre</td><td class="p-2 text-center">17</td><td class="p-2 text-right font-bold text-slate-700">1.700</td></tr>
+                                <tr><td class="p-2 font-semibold">Cetelem</td><td class="p-2 text-center">8</td><td class="p-2 text-right font-bold text-slate-700">690</td></tr>
+                                <tr><td class="p-2 font-semibold">Nubank</td><td class="p-2 text-center">6</td><td class="p-2 text-right font-bold text-slate-700">550</td></tr>
+                                <tr><td class="p-2 font-semibold">Grupo Eurovia</td><td class="p-2 text-center">7</td><td class="p-2 text-right font-bold text-slate-700">510</td></tr>
+                                <tr><td class="p-2 font-semibold">Buser</td><td class="p-2 text-center">1</td><td class="p-2 text-right font-bold text-slate-700">300</td></tr>
+                                <tr><td class="p-2 font-semibold">Mova</td><td class="p-2 text-center">2</td><td class="p-2 text-right font-bold text-slate-700">300</td></tr>
+                                <tr><td class="p-2 font-semibold">Ifood</td><td class="p-2 text-center">2</td><td class="p-2 text-right font-bold text-slate-700">200</td></tr>
+                                <tr><td class="p-2 text-[10px] text-slate-400 italic">Solfácil, Jaguar, JRCA, Inbursa</td><td class="p-2 text-center text-[10px]">-</td><td class="p-2 text-right font-bold text-slate-700 text-[10px]">< 200</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAUTA ================= -->
+        <section id="pauta" class="section-content space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-regular fa-calendar-check text-2xl text-rose-600"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Núcleo Pauta</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Agendamento</p>
+                    <p class="text-3xl font-black text-slate-800 mt-2 mb-1">4.393</p>
+                    <p class="text-[10px] text-slate-500 font-medium">Widget: 4.146 | E-mail: 136 | Deep: 111 <i class="fa-solid fa-triangle-exclamation text-amber-500 ml-1" title="Sem aud designada"></i></p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Pautados no Mês</p>
+                    <p class="text-3xl font-black text-brand-600 mt-2 mb-1">4.432</p>
+                    <p class="text-[10px] text-slate-500 font-medium">Aud. Realizadas: 3.232 (70% ext / 30% int)</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Julgamento / Sust. / Perícia</p>
+                    <div class="flex justify-between items-end mt-2">
+                        <p class="text-2xl font-black text-slate-800">1.067</p>
+                        <p class="text-xs font-bold text-slate-600 bg-slate-100 px-2 rounded">Sust: 14 | Per: 26</p>
+                    </div>
+                </div>
+                <div class="bg-rose-50 p-5 rounded-xl shadow-sm border border-rose-200">
+                    <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest">Cancel. / Redesig. / Extinto</p>
+                    <p class="text-2xl font-black text-rose-700 mt-2 mb-1">56 <span class="text-sm font-normal">/ 27 / 7</span></p>
+                    <p class="text-[10px] text-rose-600 font-medium">Descontratados: 3</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Por cliente -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 lg:col-span-2">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Volume Realizado por Cliente</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-100">
+                            <p class="font-black text-purple-900 mb-1 uppercase text-sm">Nubank</p>
+                            <p class="text-2xl font-black text-slate-800 mb-2">1.282</p>
+                            <div class="w-full bg-purple-200 rounded-full h-1.5 mb-1 flex">
+                                <div class="bg-purple-600 h-1.5 rounded-l-full" style="width: 30%"></div>
+                                <div class="bg-purple-300 h-1.5 rounded-r-full" style="width: 70%"></div>
+                            </div>
+                            <p class="text-[10px] font-semibold text-purple-800 flex justify-between"><span>Int: 428 (30%)</span> <span>Ext: 854 (70%)</span></p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-100">
+                            <p class="font-black text-yellow-900 mb-1 uppercase text-sm">Mercado Livre</p>
+                            <p class="text-2xl font-black text-slate-800 mb-2">929</p>
+                            <div class="w-full bg-yellow-200 rounded-full h-1.5 mb-1 flex">
+                                <div class="bg-yellow-500 h-1.5 rounded-l-full" style="width: 30%"></div>
+                                <div class="bg-yellow-300 h-1.5 rounded-r-full" style="width: 70%"></div>
+                            </div>
+                            <p class="text-[10px] font-semibold text-yellow-800 flex justify-between"><span>Int: 268 (30%)</span> <span>Ext: 661 (70%)</span></p>
+                        </div>
+                        <div class="bg-pink-50 p-4 rounded-lg border border-pink-100">
+                            <p class="font-black text-pink-900 mb-1 uppercase text-sm">Serasa</p>
+                            <p class="text-2xl font-black text-slate-800 mb-2">646</p>
+                            <div class="w-full bg-pink-200 rounded-full h-1.5 mb-1 flex">
+                                <div class="bg-pink-500 h-1.5 rounded-l-full" style="width: 49%"></div>
+                                <div class="bg-pink-300 h-1.5 rounded-r-full" style="width: 51%"></div>
+                            </div>
+                            <p class="text-[10px] font-semibold text-pink-800 flex justify-between"><span>Int: 318 (49%)</span> <span>Ext: 328 (51%)</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between border-t pt-4">
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase">Extra Pauta Total: <span class="text-slate-800 text-lg">62</span></p>
+                            <p class="text-xs font-semibold text-slate-600">Nu: 19 | Meli: 18 | Serasa: 10 | Demais: 15</p>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-200 p-3 rounded-lg w-full md:w-auto">
+                            <p class="text-[10px] font-bold text-amber-800 uppercase mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Não cumprem "Verificar Sustentação"</p>
+                            <p class="text-xs font-bold text-amber-900">Pendências: 416</p>
+                            <p class="text-[10px] text-amber-700">Siglas: CLRM; LFC; ELF; MEDC; DRT; DMP; IRP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Advogados & Prod -->
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-800 text-sm uppercase mb-3 border-b pb-1">Advogados & Pauta</h3>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-semibold text-slate-600">Total de advogados:</span>
+                            <span class="font-black text-slate-800">74</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-2 mb-1 flex">
+                            <div class="bg-brand-500 h-2 rounded-l-full" style="width: 91%" title="Em pauta: 68 (91%)"></div>
+                            <div class="bg-rose-500 h-2 rounded-r-full" style="width: 9%" title="Fora de pauta: 6 (9%)"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] font-bold text-slate-500 mb-4">
+                            <span class="text-brand-600">Em pauta: 68 (91%)</span>
+                            <span class="text-rose-600">Fora: 6 (9%)</span>
+                        </div>
+                        
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Top Audiências (Internos)</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <div class="flex justify-between"><span>Aline (ALCS)</span> <strong class="text-brand-600">39</strong></div>
+                            <div class="flex justify-between"><span>Alexandra (ASSA)</span> <strong class="text-brand-600">39</strong></div>
+                            <div class="flex justify-between"><span>Gabriel (GHA)</span> <strong class="text-brand-600">38</strong></div>
+                            <div class="flex justify-between text-[10px] mt-1 text-slate-500"><span>AFL; ELF; ALSL; WVS</span> <strong>37</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-700 text-white">
+                        <h3 class="font-bold text-slate-200 text-sm uppercase mb-3 border-b border-slate-600 pb-1">Produtividade Time</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="font-bold text-brand-400 text-xs">Tatiana - TKN</p>
+                                <p class="text-[10px] text-slate-300">1.934 conf. | 4.282 agend. | 2.077 dist. aud.</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-brand-400 text-xs">Ronald - RBP</p>
+                                <p class="text-[10px] text-slate-300">2.913 conf. | 676 alter./extras | 1.288 dist. aud.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SERASA CORRESPONDENTE ================= -->
+        <section id="serasa" class="section-content space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-building-user text-2xl text-pink-600"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Serasa Correspondente</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-pink-50 p-6 rounded-2xl border border-pink-100 lg:col-span-1 flex flex-col justify-center shadow-sm">
+                    <p class="text-sm font-bold text-pink-900 uppercase mb-4 border-b border-pink-200 pb-2">Custos Consolidados</p>
+                    <div class="mb-4">
+                        <p class="text-[10px] font-bold text-pink-700 uppercase">Custo Diligência</p>
+                        <p class="text-3xl font-black text-pink-600">R$ 1.665</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-pink-700 uppercase">Custo Audiência (Total)</p>
+                        <p class="text-3xl font-black text-pink-600">R$ 8.075</p>
+                        <p class="text-xs font-semibold text-pink-800 mt-1">Procon: R$ 6.570 | Jud: R$ 1.505</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 lg:col-span-2">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Processos Pautados e Realizados (81)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 mb-3">
+                                <p class="font-bold text-slate-800 text-sm mb-1">Realizadas por Interno: <span class="text-lg text-brand-600">14</span></p>
+                                <div class="text-xs text-slate-600 space-y-1">
+                                    <p><strong>Judicial (9):</strong> 9 Virtuais (PI/BA)</p>
+                                    <p><strong>Procon (5):</strong> 4 Presencial (Recife) | 1 Virtual</p>
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <p class="font-bold text-slate-800 text-sm mb-1">Realizadas Correspondente: <span class="text-lg text-brand-600">67</span></p>
+                                <div class="text-xs text-slate-600 space-y-1">
+                                    <p><strong>Judicial (21):</strong> 5 Pres (PE) | 17 Virt (PI/PB/CE/BA)</p>
+                                    <p><strong>Procon (46):</strong> 41 Pres (PE-Jaboatão) | 5 Virt (PI/CE/PB)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-500 uppercase text-[10px] mb-2">Atividades Realizadas</p>
+                            <ul class="text-xs space-y-2">
+                                <li class="flex justify-between border-b border-slate-100 pb-1"><span>Pubs/Intimações</span> <strong>192 (BRSI) | 60 (JSSA)</strong></li>
+                                <li class="flex justify-between border-b border-slate-100 pb-1"><span>Diligências Contrat.</span> <strong>29</strong></li>
+                                <li class="flex justify-between border-b border-slate-100 pb-1"><span>Pré Cadastros</span> <strong>42</strong></li>
+                                <li class="flex justify-between border-b border-slate-100 pb-1"><span>Audiências</span> <strong>104 (BRSI) | 12 (JSSA)</strong></li>
+                                <li class="flex justify-between border-b border-slate-100 pb-1"><span>Encerramentos</span> <strong>38 (BRSI)</strong></li>
+                                <li class="flex justify-between"><span>Agenda</span> <strong>356 (BRSI) | 265 (JSSA)</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-rose-50 border border-rose-200 p-5 rounded-xl shadow-sm">
+                <div class="flex items-center gap-2 mb-3 border-b border-rose-200 pb-2">
+                    <i class="fa-solid fa-bullseye text-rose-600"></i>
+                    <h3 class="font-bold text-rose-900 uppercase text-sm">SLA e Plano de Ação</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-rose-800">
+                    <div>
+                        <p class="font-bold mb-1">Dia para o dia:</p>
+                        <p class="text-xs flex items-center gap-2"><i class="fa-solid fa-check-circle text-green-500"></i> Protocolo</p>
+                        <p class="text-xs flex items-start gap-2 mt-1"><i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i> <span>Cópias: +20 novos proc. em segredo de justiça (Lauro Freitas - PROJUDI BA). Qtd indic: 2</span></p>
+                    </div>
+                    <div class="bg-white p-3 rounded bg-opacity-60">
+                        <p class="font-bold mb-1 text-xs uppercase">Ações:</p>
+                        <ul class="list-disc pl-4 text-xs space-y-1">
+                            <li>Filtro: triagem Visagio + conferência com equipe.</li>
+                            <li>Novo sistema para extração de intimações.</li>
+                            <li>Inclusão adv. interno em aud nas comarcas Paulista e Jaboatão.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= CADASTRO ================= -->
+        <section id="cadastro" class="section-content space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-address-card text-2xl text-emerald-600"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Núcleo Cadastro</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Entrada Geral</p>
+                    <p class="text-4xl font-black text-slate-800 mt-2 mb-1">5.195</p>
+                    <p class="text-[10px] text-slate-500 font-medium">Processos Cadastrados</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center flex flex-col justify-center">
+                    <div class="flex justify-between items-center px-4 w-full">
+                        <div class="text-center">
+                            <p class="text-xl font-black text-emerald-600">5.021</p>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase">No Prazo</p>
+                        </div>
+                        <div class="h-8 w-px bg-slate-200"></div>
+                        <div class="text-center">
+                            <p class="text-xl font-black text-rose-500">113</p>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase">Fora Prazo</p>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-rose-600 font-bold mt-3">Estado Crítico: 61</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center">
+                    <ul class="text-xs space-y-2 text-slate-600 font-medium">
+                        <li class="flex justify-between border-b pb-1"><span>Devolvidos/Descontr.:</span> <strong class="text-slate-800">17</strong></li>
+                        <li class="flex justify-between border-b pb-1"><span>Vinculados (Recursos):</span> <strong class="text-slate-800">5</strong></li>
+                        <li class="flex justify-between border-b pb-1"><span>Segredo de Justiça:</span> <strong class="text-slate-800">95</strong></li>
+                        <li class="flex justify-between text-[10px] pt-1 text-slate-400"><span>Correções DALS (Ajustes/Erros):</span> <strong class="text-orange-500">82 (1%)</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Entradas Cliente -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Volume Recebido por Cliente</h3>
+                    <div class="space-y-3 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-purple-700">Nubank</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">2.154</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-yellow-600">Mercado Livre</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">1.863</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-pink-600">Serasa</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">625</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-red-700">Bradesco</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">165</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-orange-600">iFood</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">76</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-emerald-600">Buser</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">64</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-slate-600">Grupo Via 1</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">54</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-slate-600">Mova</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">45</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-blue-600">Cetelem</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">43</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-slate-600">BNB</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">34</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-slate-600">Totvs</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">23</span></div>
+                        <div class="flex items-center justify-between text-sm"><span class="font-bold text-slate-400 italic">Demais</span> <span class="font-black bg-slate-100 px-2 py-1 rounded">49</span></div>
+                    </div>
+                </div>
+
+                <!-- Produtividade -->
+                <div class="bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-700 text-white flex flex-col">
+                    <h3 class="font-bold text-brand-400 text-sm uppercase mb-4 border-b border-slate-600 pb-2">Produtividade SEVEN / Aceites</h3>
+                    <div class="overflow-y-auto custom-scrollbar flex-grow pr-2 space-y-4">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase mb-2">Nubank</p>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                                <div><span class="text-slate-300">TGS:</span> <strong>549</strong> <span class="text-[10px] text-brand-300">(11%)</span></div>
+                                <div><span class="text-slate-300">LGRM:</span> <strong>430</strong> <span class="text-[10px] text-brand-300">(8%)</span></div>
+                                <div><span class="text-slate-300">MHB:</span> <strong>422</strong> <span class="text-[10px] text-brand-300">(8%)</span></div>
+                                <div><span class="text-slate-300">RTA:</span> <strong>329</strong> <span class="text-[10px] text-brand-300">(6%)</span></div>
+                                <div><span class="text-slate-300">BVF:</span> <strong>55</strong> <span class="text-[10px] text-brand-300">(1%)</span></div>
+                                <div><span class="text-slate-300">GMTS:</span> <strong>17</strong> <span class="text-[10px] text-brand-300">(0.1%)</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase mb-2">Meli & Serasa</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-300">LNS (Meli/Serasa):</span> <strong>770</strong> <span class="text-[10px] text-brand-300">(15%)</span></div>
+                                <div><span class="text-slate-300">AAMS (Meli):</span> <strong>606</strong> <span class="text-[10px] text-brand-300">(12%)</span></div>
+                                <div><span class="text-slate-300">MIMM (Meli):</span> <strong>471</strong> <span class="text-[10px] text-brand-300">(9%)</span></div>
+                                <div><span class="text-slate-300">AAAN (Serasa/Mova):</span> <strong>431</strong> <span class="text-[10px] text-brand-300">(8%)</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase mb-2">Diversos</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-300">KAB (Ser/Nu/Meli/iF):</span> <strong>542</strong> <span class="text-[10px] text-brand-300">(10%)</span></div>
+                                <div><span class="text-slate-300">VGS (iFood/Demais):</span> <strong>352</strong> <span class="text-[10px] text-brand-300">(7%)</span></div>
+                                <div><span class="text-slate-300">AMCO (Nu/iF/Brad):</span> <strong>250</strong> <span class="text-[10px] text-brand-300">(5%)</span></div>
+                                <div><span class="text-slate-300">DALS:</span> <strong>66</strong> <span class="text-[10px] text-brand-300">(1%)</span></div>
+                            </div>
+                        </div>
+                        <div class="border-t border-slate-600 pt-3">
+                            <p class="text-xs font-bold text-brand-400 uppercase mb-2">Aceites NUBANK</p>
+                            <div class="flex flex-wrap gap-3 text-xs">
+                                <span>LASL: <strong>1.243</strong> (52%)</span>
+                                <span>GMTS: <strong>1.042</strong> (44%)</span>
+                                <span>KAB: <strong>65</strong></span>
+                                <span>AMCO: <strong>42</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= ENCERRAMENTO ================= -->
+        <section id="encerramento" class="section-content space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-flag-checkered text-2xl text-slate-700"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Núcleo Encerramento</h2>
+            </div>
+
+            <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-8 text-center text-white shadow-lg mb-8 relative overflow-hidden">
+                <i class="fa-solid fa-trophy absolute -right-4 -bottom-4 text-8xl text-white opacity-5"></i>
+                <p class="text-sm font-bold text-brand-300 uppercase tracking-widest mb-2 relative z-10">Total Geral Encerrado</p>
+                <p class="text-6xl font-black relative z-10">3.147</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Nubank -->
+                <div class="bg-white rounded-xl shadow-sm border-t-4 border-t-purple-500 overflow-hidden">
+                    <div class="bg-purple-50 p-4 border-b border-purple-100">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="font-black text-purple-900 uppercase">Nubank</h3>
+                            <span class="text-xs font-bold bg-white text-purple-700 px-2 py-1 rounded">Meta: 1000 | Fatur: 1.455</span>
+                        </div>
+                        <p class="text-3xl font-black text-slate-800">1.071 <span class="text-[10px] font-normal text-slate-500 uppercase">Encerrados</span></p>
+                    </div>
+                    <div class="p-5 text-sm space-y-4">
+                        <div>
+                            <p class="font-bold text-slate-600 text-[10px] uppercase mb-1">Taxa de Êxito / Ticket Médio</p>
+                            <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                                <div class="bg-slate-50 p-2 rounded border border-slate-100"><p class="font-bold text-purple-700 mb-1">N (93%)</p><p>R$ 357</p></div>
+                                <div class="bg-slate-50 p-2 rounded border border-slate-100"><p class="font-bold text-purple-700 mb-1">NE (87%)</p><p>R$ 718</p></div>
+                                <div class="bg-slate-50 p-2 rounded border border-slate-100"><p class="font-bold text-purple-700 mb-1">SE (86%)</p><p>R$ 593</p></div>
+                            </div>
+                            <p class="text-[9px] text-slate-400 mt-1 italic">Metas Exito: N(92) NE(85) SE(83). Metas Ticket: N(369) NE(959) SE(1046).</p>
+                        </div>
+                        <div class="border-t pt-3">
+                            <p class="font-bold text-slate-600 text-[10px] uppercase mb-2">Desfechos</p>
+                            <div class="flex justify-between items-center bg-green-50 px-2 py-1 rounded mb-1"><span class="font-semibold text-green-700">Favorável (80.1%)</span> <strong>1.166</strong></div>
+                            <div class="flex justify-between items-center bg-rose-50 px-2 py-1 rounded mb-1"><span class="font-semibold text-rose-700">Desfavorável (17.7%)</span> <strong>258</strong></div>
+                            <div class="flex justify-between items-center bg-blue-50 px-2 py-1 rounded"><span class="font-semibold text-blue-700">Acordos</span> <strong>31 <span class="text-[10px] font-normal">(Pré 14 | Pós 17)</span></strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mercado Livre -->
+                <div class="bg-white rounded-xl shadow-sm border-t-4 border-t-yellow-400 overflow-hidden">
+                    <div class="bg-yellow-50 p-4 border-b border-yellow-100">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="font-black text-yellow-900 uppercase">Mercado Livre</h3>
+                            <span class="text-xs font-bold bg-white text-yellow-700 px-2 py-1 rounded">Faturamento: 1.019</span>
+                        </div>
+                        <p class="text-3xl font-black text-slate-800">968 <span class="text-[10px] font-normal text-slate-500 uppercase">Encerrados</span></p>
+                    </div>
+                    <div class="p-5 text-sm space-y-4 h-full flex flex-col justify-between">
+                        <div>
+                            <p class="font-bold text-slate-600 text-[10px] uppercase mb-2">Desfechos</p>
+                            <div class="flex justify-between items-center bg-green-50 px-2 py-1 rounded mb-1"><span class="font-semibold text-green-700">Favorável (62.09%)</span> <strong>601</strong></div>
+                            <div class="flex justify-between items-center bg-rose-50 px-2 py-1 rounded mb-1"><span class="font-semibold text-rose-700">Desfavorável (34.5%)</span> <strong>334</strong></div>
+                            <div class="flex justify-between items-center bg-blue-50 px-2 py-1 rounded"><span class="font-semibold text-blue-700">Acordos (3.41%)</span> <strong>33 <span class="text-[10px] font-normal">(Pré 4 | Pós 29)</span></strong></div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 text-center">
+                            <p class="text-xs font-bold text-slate-500 uppercase mb-1">Taxa de Êxito Geral</p>
+                            <p class="text-2xl font-black text-green-600">62%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bradesco -->
+                <div class="bg-white rounded-xl shadow-sm border-t-4 border-t-red-600 overflow-hidden">
+                    <div class="bg-red-50 p-4 border-b border-red-100">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="font-black text-red-900 uppercase">Bradesco</h3>
+                            <span class="text-xs font-bold bg-white text-red-700 px-2 py-1 rounded">Meta: 202 (Êxito 48%)</span>
+                        </div>
+                        <p class="text-3xl font-black text-slate-800">214 <span class="text-[10px] font-normal text-slate-500 uppercase">Encerrados</span></p>
+                    </div>
+                    <div class="p-5 text-sm space-y-3">
+                        <div class="flex justify-between items-center bg-green-50 px-2 py-1 rounded"><span class="font-semibold text-green-700">Favorável</span> <strong>90</strong></div>
+                        <div class="flex justify-between items-center bg-rose-50 px-2 py-1 rounded"><span class="font-semibold text-rose-700">Desfavorável</span> <strong>105</strong></div>
+                        <div class="flex justify-between items-center bg-blue-50 px-2 py-1 rounded"><span class="font-semibold text-blue-700">Acordos</span> <strong>18</strong></div>
+                        <div class="grid grid-cols-2 gap-2 mt-4 pt-3 border-t text-[10px] font-bold text-slate-600">
+                            <p>Exito s/ ônus: <span class="text-sm text-slate-800 block">42%</span></p>
+                            <p>Desfavorável: <span class="text-sm text-slate-800 block">50%</span></p>
+                            <p>Acordo: <span class="text-sm text-slate-800 block">8%</span></p>
+                            <p>Revisão: <span class="text-sm text-slate-800 block">15%</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serasa / Outros / Operação -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col space-y-4">
+                    <div class="flex justify-between border-b pb-3">
+                        <div>
+                            <p class="text-[10px] font-bold text-pink-600 uppercase">Serasa</p>
+                            <p class="text-2xl font-black text-slate-800">343</p>
+                            <p class="text-[10px] text-slate-500 mt-1">Fav: 286 (83%) | Desf: 57 (16%) | Rev: 5%</p>
+                        </div>
+                        <div class="text-right border-l pl-4">
+                            <p class="text-[10px] font-bold text-slate-500 uppercase">Outros Clientes</p>
+                            <p class="text-2xl font-black text-slate-800">176</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-3 rounded border border-slate-100 text-xs text-slate-700 space-y-2">
+                        <p class="font-bold text-slate-800 uppercase mb-1">Operação Diária</p>
+                        <p class="flex justify-between border-b pb-1"><span>Compromissos Recebidos:</span> <strong>18.209</strong></p>
+                        <p class="flex justify-between border-b pb-1"><span>Analisados:</span> <strong>16.168</strong></p>
+                        <p class="flex justify-between"><span>Planilhas Meli (15d):</span> <strong>1.709</strong></p>
+                        <p class="text-[10px] italic text-slate-500 mt-1 pt-1 border-t">Agendas Serasa (425) tratadas 269, pend 0. <br>Aguardando Cliente: Serasa (556).</p>
+                    </div>
+
+                    <div class="bg-brand-50 p-3 rounded border border-brand-100 text-xs">
+                        <p class="font-bold text-brand-900 mb-1">Deep Legal (Bradesco)</p>
+                        <p class="text-brand-800">210 analisados (1 caso apto)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Equipe e Produtividade (Encerramento) -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Equipe e Produtividade (10 pessoas)</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
+                    <div class="p-2"><p class="font-bold text-slate-600">MVC</p><p class="text-lg font-black text-slate-800">332</p></div>
+                    <div class="p-2"><p class="font-bold text-slate-600">LVSC <span class="text-[9px] font-normal">(Est)</span></p><p class="text-lg font-black text-slate-800">1.121</p></div>
+                    <div class="p-2"><p class="font-bold text-slate-600">LPMS</p><p class="text-lg font-black text-slate-800">2.013</p></div>
+                    <div class="p-2"><p class="font-bold text-slate-600">SVM</p><p class="text-lg font-black text-slate-800">1.687</p></div>
+                    <div class="p-2"><p class="font-bold text-slate-600">MTS</p><p class="text-lg font-black text-slate-800">2.327</p></div>
+                    <div class="p-2"><p class="font-bold text-slate-600">GVS</p><p class="text-lg font-black text-slate-800">2.249</p></div>
+                    <div class="p-2"><p class="font-bold text-slate-600">ADRM</p><p class="text-lg font-black text-slate-800">2.135</p></div>
+                    <div class="p-2"><p class="font-bold text-slate-600">KRS</p><p class="text-lg font-black text-slate-800">2.554</p></div>
+                    <div class="p-2 md:col-start-2"><p class="font-bold text-slate-600">MTLL</p><p class="text-lg font-black text-slate-800">1.750</p></div>
+                </div>
+                <div class="mt-4 bg-rose-50 text-rose-800 text-xs p-3 rounded-lg border border-rose-100 flex items-start gap-2">
+                    <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
+                    <p><strong>Falhas Operacionais:</strong> Meli (13 - Ajuste no valor do risco/Cadastrar instância).</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= ACORDOS ================= -->
+        <section id="acordo" class="section-content space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-handshake text-2xl text-emerald-600"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Núcleo Acordos</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Recebidos</p>
+                    <p class="text-3xl font-black text-slate-800 mt-2">758</p>
+                    <p class="text-[10px] text-slate-500 mt-1">Inaptos: 30 (3.96%) | Aptos: 728</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-emerald-500">
+                    <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Acordos Fechados</p>
+                    <p class="text-3xl font-black text-emerald-600 mt-2">119</p>
+                    <p class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded inline-block mt-1">Taxa Conversão: 16.35%</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-rose-500">
+                    <p class="text-[10px] font-bold text-rose-600 uppercase tracking-widest">Acordos Negados</p>
+                    <p class="text-3xl font-black text-rose-600 mt-2">609</p>
+                    <p class="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-1 rounded inline-block mt-1">83.65% (Aptos)</p>
+                </div>
+                <div class="bg-slate-800 p-5 rounded-xl shadow-sm border border-slate-700 text-white">
+                    <p class="text-[10px] font-bold text-brand-400 uppercase tracking-widest">Tarefas Nubank</p>
+                    <p class="text-3xl font-black text-white mt-2">1.515</p>
+                    <p class="text-[10px] text-slate-300 mt-1">Tratadas (dia): ≈ 72/73 (MLNR)</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Por cliente e Motivos -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 lg:col-span-2 flex flex-col">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Negociações por Cliente</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100">
+                            <p class="font-bold text-purple-900 mb-2 uppercase text-sm">Nubank <span class="text-[10px] font-normal">(54%)</span></p>
+                            <p class="text-xs flex justify-between border-b border-purple-200 pb-1 mb-1"><span>Recebidos:</span> <strong>394</strong></p>
+                            <p class="text-xs flex justify-between border-b border-purple-200 pb-1 mb-1"><span>Fechados:</span> <strong class="text-emerald-600">52</strong></p>
+                            <p class="text-xs flex justify-between"><span>Negados:</span> <strong class="text-rose-600">342</strong></p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-100">
+                            <p class="font-bold text-yellow-900 mb-2 uppercase text-sm">Mercado Livre <span class="text-[10px] font-normal">(26%)</span></p>
+                            <p class="text-xs flex justify-between border-b border-yellow-200 pb-1 mb-1"><span>Recebidos:</span> <strong>193</strong></p>
+                            <p class="text-xs flex justify-between border-b border-yellow-200 pb-1 mb-1"><span>Fechados:</span> <strong class="text-emerald-600">33</strong></p>
+                            <p class="text-xs flex justify-between"><span>Negados:</span> <strong class="text-rose-600">160</strong></p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                            <p class="font-bold text-red-900 mb-2 uppercase text-sm">Bradesco <span class="text-[10px] font-normal">(Meta: 67)</span></p>
+                            <p class="text-[10px] text-red-800 mb-1 leading-tight">Base: 949 | Neg. CJ: 258</p>
+                            <p class="text-xs flex justify-between border-b border-red-200 pb-1 mb-1"><span>Tratados:</span> <strong>112</strong></p>
+                            <p class="text-xs flex justify-between border-b border-red-200 pb-1 mb-1"><span>Fechados:</span> <strong class="text-emerald-600">26</strong> <span class="text-[9px] font-normal">(Pré 3/Pós 23)</span></p>
+                            <p class="text-xs flex justify-between"><span>Negados:</span> <strong class="text-rose-600">86</strong> <span class="text-[9px] font-normal">(146 negoc)</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto bg-rose-50 p-4 rounded-xl border border-rose-100">
+                        <p class="font-bold text-rose-900 text-sm mb-3 border-b border-rose-200 pb-1 uppercase">Motivos Negativas (609 acordos)</p>
+                        <div class="space-y-2 text-xs text-rose-800">
+                            <div class="flex justify-between items-center"><span class="flex-1">Sem retorno da parte adversa</span> <strong class="w-16 text-right">305</strong> <span class="w-12 text-right text-[10px]">(50%)</span></div>
+                            <div class="flex justify-between items-center"><span class="flex-1">Sem interesse em conciliar</span> <strong class="w-16 text-right">152</strong> <span class="w-12 text-right text-[10px]">(25%)</span></div>
+                            <div class="flex justify-between items-center"><span class="flex-1">Sem interesse nos valores</span> <strong class="w-16 text-right">80</strong> <span class="w-12 text-right text-[10px]">(13%)</span></div>
+                            <div class="flex justify-between items-center"><span class="flex-1">Contraproposta > condenação</span> <strong class="w-16 text-right">41</strong> <span class="w-12 text-right text-[10px]">(7%)</span></div>
+                            <div class="flex justify-between items-center"><span class="flex-1">Pagamento interno solicitado</span> <strong class="w-16 text-right">31</strong> <span class="w-12 text-right text-[10px]">(5%)</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produtividade e Tarefas -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Negociadores (Taxa Form.)</h3>
+                        <div class="space-y-3">
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <div class="flex justify-between mb-1 text-sm font-bold text-slate-800"><span>Rodrigo Nogueira</span> <span class="text-brand-600">20.0%</span></div>
+                                <div class="w-full bg-slate-200 rounded-full h-1.5 mb-1"><div class="bg-brand-500 h-1.5 rounded-full" style="width: 20%"></div></div>
+                                <p class="text-[10px] text-slate-500">Tratados: 165 | Formalizados: 33</p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <div class="flex justify-between mb-1 text-sm font-bold text-slate-800"><span>Marcella Santos</span> <span class="text-brand-600">18.0%</span></div>
+                                <div class="w-full bg-slate-200 rounded-full h-1.5 mb-1"><div class="bg-brand-500 h-1.5 rounded-full" style="width: 18%"></div></div>
+                                <p class="text-[10px] text-slate-500">Tratados: 139 | Formalizados: 25</p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <div class="flex justify-between mb-1 text-sm font-bold text-slate-800"><span>Johnny Chagas</span> <span class="text-brand-600">13.9%</span></div>
+                                <div class="w-full bg-slate-200 rounded-full h-1.5 mb-1"><div class="bg-brand-500 h-1.5 rounded-full" style="width: 14%"></div></div>
+                                <p class="text-[10px] text-slate-500">Tratados: 223 | Formalizados: 31</p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <div class="flex justify-between mb-1 text-sm font-bold text-slate-800"><span>Mateus Leão</span> <span class="text-brand-600">10.2%</span></div>
+                                <div class="w-full bg-slate-200 rounded-full h-1.5 mb-1"><div class="bg-brand-500 h-1.5 rounded-full" style="width: 10%"></div></div>
+                                <p class="text-[10px] text-slate-500">Tratados: 187 | Formalizados: 19</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-700 text-xs uppercase mb-2">Equipe e Detalhes Operacionais</p>
+                        <p class="text-xs text-slate-600 mb-2"><strong>Equipe:</strong> 8 pessoas (6 Aux. Negociação, 1 Aux. Base, 1 Est. Minutas).</p>
+                        <p class="text-xs text-slate-600 mb-2"><strong>Minutas (JGRC):</strong> 119/mês (≈ 5-6/dia).</p>
+                        <div class="bg-white p-3 rounded border border-slate-200 mt-3 text-[10px] text-slate-600 space-y-2">
+                            <p><strong>Novos Entrantes (Em Treinamento):</strong></p>
+                            <p>• Giulia Paiva (12/05) - Neg, Análises e Sist Bradesco.</p>
+                            <p>• Gabriela Assis (25/05) - Neg Meli e demais.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= ANDAMENTO ================= -->
+        <section id="andamento" class="section-content space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-list-check text-2xl text-blue-600"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Andamento (Compromissos e Audiências)</h2>
+            </div>
+
+            <!-- Resumo Geral -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wide mb-4">Compromissos</h3>
+                    <div class="flex items-baseline gap-2 mb-4">
+                        <p class="text-4xl font-black text-slate-800">7.745</p>
+                        <p class="text-xs text-slate-500">tratados</p>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between"><span class="text-slate-600">Recebidos:</span> <strong class="text-slate-800">7.813</strong></div>
+                        <div class="flex justify-between"><span class="text-green-600">No Prazo:</span> <strong class="text-green-700">2.556</strong></div>
+                        <div class="flex justify-between"><span class="text-amber-600">Atraso (72h):</span> <strong class="text-amber-700">1.760</strong></div>
+                        <div class="flex justify-between"><span class="text-rose-600">Crítico (5d):</span> <strong class="text-rose-700">3.429</strong></div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wide mb-4">PA (Audiências)</h3>
+                    <div class="flex items-baseline gap-2 mb-4">
+                        <p class="text-4xl font-black text-slate-800">2.919</p>
+                        <p class="text-xs text-slate-500">tratados</p>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between"><span class="text-slate-600">Recebidas:</span> <strong class="text-slate-800">3.297</strong></div>
+                        <div class="flex justify-between"><span class="text-green-600">No Prazo:</span> <strong class="text-green-700">1.738</strong></div>
+                        <div class="flex justify-between"><span class="text-amber-600">Atraso (72h):</span> <strong class="text-amber-700">180</strong></div>
+                        <div class="flex justify-between"><span class="text-rose-600">Crítico (5d):</span> <strong class="text-rose-700">1.001</strong></div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wide mb-4">Trat. Audiências</h3>
+                    <div class="flex items-baseline gap-2 mb-4">
+                        <p class="text-4xl font-black text-slate-800">4.536</p>
+                        <p class="text-xs text-slate-500">tratados</p>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between"><span class="text-slate-600">Recebidas:</span> <strong class="text-slate-800">4.536</strong></div>
+                        <div class="flex justify-between"><span class="text-green-600">No Prazo:</span> <strong class="text-green-700">3.874</strong></div>
+                        <div class="flex justify-between"><span class="text-rose-600">Fora Prazo:</span> <strong class="text-rose-700">645</strong></div>
+                        <div class="flex justify-between border-t pt-1"><span class="text-slate-600">Pendentes:</span> <strong class="text-slate-800">17</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detalhamentos -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Entradas por Cliente</h3>
+                    <div class="grid grid-cols-3 gap-x-4 gap-y-6 text-xs">
+                        <!-- Nubank -->
+                        <div>
+                            <p class="font-bold text-purple-700 mb-1">Nubank</p>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>Comp: 2.544</li><li>PA Aud: 1.612</li><li>Auds: 1.889</li>
+                            </ul>
+                        </div>
+                        <!-- Meli -->
+                        <div>
+                            <p class="font-bold text-yellow-600 mb-1">Mercado Livre</p>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>Comp: 2.154</li><li>PA Aud: 831</li><li>Auds: 1.401</li>
+                            </ul>
+                        </div>
+                        <!-- Serasa -->
+                        <div>
+                            <p class="font-bold text-pink-600 mb-1">Serasa</p>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>Comp: 1.472</li><li>PA Aud: 599</li><li>Auds: 718</li>
+                            </ul>
+                        </div>
+                        <!-- Bradesco -->
+                        <div>
+                            <p class="font-bold text-red-700 mb-1">Bradesco</p>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>Comp: 1.225</li><li>PA Aud: 32</li><li>Auds: 71</li>
+                            </ul>
+                        </div>
+                        <!-- Cetelem -->
+                        <div>
+                            <p class="font-bold text-blue-600 mb-1">Cetelem</p>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>Comp: 225</li><li>PA Aud: 13</li><li>Auds: 126</li>
+                            </ul>
+                        </div>
+                        <!-- Ifood -->
+                        <div>
+                            <p class="font-bold text-orange-600 mb-1">Ifood</p>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>Comp: 60</li><li>PA Aud: 94</li><li>Auds: 99</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-rose-50 border border-rose-200 p-5 rounded-xl shadow-sm text-sm">
+                        <h3 class="font-bold text-rose-900 uppercase mb-3 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> Possíveis Revelias (5)</h3>
+                        <div class="space-y-3 text-rose-800 text-xs">
+                            <div>
+                                <p class="font-bold">Nubank (3):</p>
+                                <p class="ml-2 mt-1">- 1 Extinto s/ resolução (ausência ambas as partes).</p>
+                                <p class="ml-2 mt-1">- 1 CEF e Nu não compareceram aud concilição (reportado).</p>
+                                <p class="ml-2 mt-1">- 1 Autora pediu revelia. Sem intim. no DJ (decurso prazo apenas). Pedido chamento feito à ordem.</p>
+                            </div>
+                            <div>
+                                <p class="font-bold">Mova (2):</p>
+                                <p class="ml-2 mt-1">- 1 Falha pauta (comparecemos repr. Nu).</p>
+                                <p class="ml-2 mt-1">- 1 Violada ampla defesa (não respeitou 20d CPC).</p>
+                            </div>
+                            <div>
+                                <p class="font-bold">Serasa (2)* <span class="font-normal italic">Relatado no bloco mas a conta geral diz 5</span>:</p>
+                                <p class="ml-2 mt-1">- 1 Chamamento feito (não citados).</p>
+                                <p class="ml-2 mt-1">- 1 Não declarada revelia ausência aud.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-800 text-sm uppercase mb-3 border-b pb-1">Operação e Produtividade</h3>
+                        <p class="text-[10px] text-slate-600 mb-2"><strong>Time:</strong> 9 pes. (7 Aux / 3 Estag). Pedro problemas renovação (1 semana fora).</p>
+                        <p class="text-[10px] text-slate-600 mb-2"><strong>SLA:</strong> Aud 24h | Comp 48h | PA 48h. Revisão: 7% (1.044)</p>
+                        <div class="bg-amber-50 p-2 rounded border border-amber-100 text-[10px] text-amber-900 mb-3">
+                            <strong class="uppercase">Aviso PA (Seven):</strong> Atrasos devido a trava no sistema (liminares). Prazos abertos s/ perda. Já regularizado.
+                        </div>
+                        <div class="text-xs">
+                            <p class="font-bold text-slate-700 mb-1">Ativ Extra (San. Serasa 9.068):</p>
+                            <p class="text-[10px] text-slate-600">Tamires(1.813), Fernanda(1.751), Rania(1.500), Janilton(1.228), Emerson(1.157), Thayanne(809)...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Agendas</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                    <div>
+                        <p class="font-bold text-green-700 bg-green-50 px-2 py-1 rounded inline-block mb-2">Serasa e Mova: Em dia!</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-purple-700 mb-1 uppercase">Nubank</p>
+                        <p class="text-xs text-slate-600 mb-1">Tarefas: 16.589</p>
+                        <p class="text-xs text-slate-600 mb-1">Tratadas Int: 10.949 | Mutirão Avem: 5.072 <span class="italic text-[10px]">(Pendentes aud Avem: 2000)</span></p>
+                        <p class="text-xs font-bold text-slate-800">Pendentes Int: 568</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-yellow-700 mb-1 uppercase">Mercado Livre</p>
+                        <p class="text-xs text-slate-600 mb-1">Tarefas: 7.425</p>
+                        <p class="text-xs text-slate-600 mb-1">Tratadas: 4.438</p>
+                        <p class="text-xs font-bold text-rose-600">Pendentes: 2.987</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PA ================= -->
+        <section id="pa" class="section-content space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-folder-tree text-2xl text-cyan-600"></i>
+                <h2 class="text-2xl font-bold text-slate-800">PA (Posição de Andamento)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-cyan-50 p-6 rounded-2xl border border-cyan-100 lg:col-span-1 shadow-sm flex flex-col justify-center">
+                    <p class="text-sm font-bold text-cyan-900 uppercase mb-4 border-b border-cyan-200 pb-2">Status Operacional</p>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center"><span class="text-sm text-cyan-800 font-semibold">Recebidos:</span> <strong class="text-xl text-cyan-900">4.408</strong></div>
+                        <div class="flex justify-between items-center"><span class="text-sm text-cyan-800 font-semibold">Tratados:</span> <strong class="text-xl text-cyan-900">4.833</strong></div>
+                        <div class="flex justify-between items-center"><span class="text-sm text-cyan-800 font-semibold">Atraso:</span> <strong class="text-xl text-rose-600">1.406</strong></div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-cyan-200 grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-white p-3 rounded-lg border border-cyan-50">
+                            <p class="text-xs font-bold text-slate-500 uppercase mb-1">No Prazo</p>
+                            <p class="text-lg font-black text-emerald-600">1.623 <span class="text-[10px] font-normal text-slate-500">33%</span></p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-cyan-50">
+                            <p class="text-xs font-bold text-slate-500 uppercase mb-1">Fora Prazo</p>
+                            <p class="text-lg font-black text-rose-600">3.210 <span class="text-[10px] font-normal text-slate-500">68%</span></p>
+                        </div>
+                    </div>
+                    <p class="text-xs font-bold text-amber-700 bg-amber-50 p-2 rounded mt-4 text-center border border-amber-100">Revisão: 2.031 casos (42%)</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 lg:col-span-2">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Tratados por Cliente</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-6">
+                        <div class="bg-slate-50 p-3 rounded border border-slate-100">
+                            <p class="font-bold text-purple-700 text-xs uppercase mb-1">Nubank</p>
+                            <p class="text-xl font-black text-slate-800">1.978 <span class="text-[10px] font-normal text-slate-500">40%</span></p>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-100">
+                            <p class="font-bold text-yellow-600 text-xs uppercase mb-1">Meli</p>
+                            <p class="text-xl font-black text-slate-800">1.787 <span class="text-[10px] font-normal text-slate-500">36%</span></p>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-100">
+                            <p class="font-bold text-pink-600 text-xs uppercase mb-1">Serasa</p>
+                            <p class="text-xl font-black text-slate-800">609 <span class="text-[10px] font-normal text-slate-500">12%</span></p>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-100">
+                            <p class="font-bold text-blue-600 text-xs uppercase mb-1">Cetelem</p>
+                            <p class="text-xl font-black text-slate-800">189 <span class="text-[10px] font-normal text-slate-500">3%</span></p>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-500 font-semibold mb-6">Demais: Bradesco (61) | IFood (60) | Mova (49) | Via Sul (42) | Outros (58)</p>
+
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Produtividade & Estratégia</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2 text-xs">
+                            <div class="flex justify-between bg-slate-50 px-2 py-1 rounded"><span>Tainan (TSSL):</span> <strong class="text-brand-600">1.984 (42%)</strong></div>
+                            <div class="flex justify-between bg-slate-50 px-2 py-1 rounded"><span>Ruan (RUMA):</span> <strong class="text-brand-600">1.092 (22%)</strong></div>
+                            <div class="flex justify-between bg-slate-50 px-2 py-1 rounded"><span>Maria Alice (MAFO):</span> <strong class="text-brand-600">1.011 (21%)</strong></div>
+                            <div class="flex justify-between bg-slate-50 px-2 py-1 rounded"><span>Ademir (ANSN):</span> <strong class="text-brand-600">746 (15%)</strong></div>
+                            <p class="text-[10px] text-slate-500 mt-2">*Alice e Ruan divididos no tratamento citações.</p>
+                        </div>
+                        <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-xl text-xs text-indigo-900">
+                            <ul class="list-disc pl-4 space-y-1">
+                                <li>Time de 3 (Ruan, Tainan, Alice).</li>
+                                <li>Pessoa de relatório emprestada.</li>
+                                <li>SLA 5 dias. Sem falhas.</li>
+                                <li><strong class="text-brand-700">Mutirão:</strong> 3.693 realizados.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGAMENTO ================= -->
+        <section id="pagamento" class="section-content space-y-6">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fa-solid fa-money-bill-wave text-2xl text-emerald-600"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Núcleo Pagamento</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Visão Geral -->
+                <div class="bg-slate-800 text-white p-6 rounded-2xl shadow-sm lg:col-span-1 flex flex-col justify-center">
+                    <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-600 pb-2">Realizados Geral</p>
+                    <p class="text-5xl font-black text-white mb-6">2.561</p>
+                    
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between"><span class="text-slate-300">Condenação:</span> <strong class="text-emerald-400">1.529</strong></div>
+                        <div class="flex justify-between"><span class="text-slate-300">Custas:</span> <strong class="text-emerald-400">807</strong></div>
+                        <div class="flex justify-between"><span class="text-slate-300">Custas finais:</span> <strong class="text-emerald-400">117</strong></div>
+                        <div class="flex justify-between"><span class="text-slate-300">Acordo:</span> <strong class="text-emerald-400">108</strong></div>
+                    </div>
+                    
+                    <div class="mt-6 pt-4 border-t border-slate-600 grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-slate-700 p-2 rounded-lg">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">No Prazo</p>
+                            <p class="text-lg font-black text-emerald-400">1.862</p>
+                        </div>
+                        <div class="bg-slate-700 p-2 rounded-lg">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Fora Prazo</p>
+                            <p class="text-lg font-black text-rose-400">699</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detalhe Cliente -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 lg:col-span-2">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Análise por Cliente</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                        
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100">
+                            <div class="flex justify-between items-center mb-3">
+                                <p class="font-black text-purple-900 text-sm uppercase">Nubank</p>
+                                <span class="bg-purple-200 text-purple-900 font-bold px-2 py-0.5 rounded">Rec/Realiz: 1.041</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mb-3 text-[10px] text-slate-700">
+                                <div>Cond: 675 (64%)</div><div>Custas: 274 (26%)</div>
+                                <div>Acordo: 43 (5%)</div><div>Finais: 49 (5%)</div>
+                            </div>
+                            <div class="flex justify-between border-t border-purple-200 pt-2 font-bold text-xs">
+                                <span class="text-green-700">Prazo: 814</span>
+                                <span class="text-rose-600">Fora: 227 (201 cond)</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-100">
+                            <div class="flex justify-between items-center mb-3">
+                                <p class="font-black text-yellow-900 text-sm uppercase">Mercado Livre</p>
+                                <span class="bg-yellow-200 text-yellow-900 font-bold px-2 py-0.5 rounded">Rec/Realiz: 992</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mb-3 text-[10px] text-slate-700">
+                                <div>Cond: 664 (27%)</div><div>Custas: 265 (4%)</div>
+                                <div>Acordo: 44 (67%)</div><div>Finais: 19 (2%)</div>
+                            </div>
+                            <div class="flex justify-between border-t border-yellow-200 pt-2 font-bold text-xs">
+                                <span class="text-green-700">Prazo: 564</span>
+                                <span class="text-rose-600">Fora: 428 (426 cond)</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                            <div class="flex justify-between items-center mb-3">
+                                <p class="font-black text-red-900 text-sm uppercase">Bradesco</p>
+                                <span class="bg-red-200 text-red-900 font-bold px-2 py-0.5 rounded">Rec/Realiz: 172</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mb-3 text-[10px] text-slate-700">
+                                <div>Cond: 84 (49%)</div><div>Custas: 61 (35%)</div>
+                                <div>Acordo: 20 (11%)</div><div>Finais: 7 (5%)</div>
+                            </div>
+                            <div class="flex justify-between border-t border-red-200 pt-2 font-bold text-xs">
+                                <span class="text-green-700">Prazo: 172 (100%)</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <div class="flex justify-between items-center mb-3">
+                                <p class="font-black text-slate-800 text-sm uppercase">Demais</p>
+                                <span class="bg-slate-200 text-slate-800 font-bold px-2 py-0.5 rounded">Rec/Realiz: 356</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mb-3 text-[10px] text-slate-700">
+                                <div>Custas Finais: 207 (58%)</div><div>Cond: 106 (29%)</div>
+                                <div>Custas: 42 (11%)</div><div>Acordo: 1 (2%)</div>
+                            </div>
+                            <div class="flex justify-between border-t border-slate-200 pt-2 font-bold text-xs">
+                                <span class="text-green-700">Prazo: 356 (100%)</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-rose-50 p-6 rounded-xl border border-rose-200">
+                    <h3 class="font-black text-rose-900 text-sm uppercase mb-4 border-b border-rose-200 pb-2"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Reprovações Nubank: 118</h3>
+                    <div class="space-y-4 text-xs text-rose-800">
+                        <div>
+                            <p class="font-bold mb-1">Falha Núcleo (56 casos):</p>
+                            <p class="text-[10px] text-rose-700 bg-white p-2 rounded">Anexar documento comprobatório p/ analise pagamento, verificar dados.</p>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-1">Falha Advogado (37 casos):</p>
+                            <p class="text-[10px] text-rose-700 bg-white p-2 rounded">Memória cálculo divergente da sentença/acórdão.</p>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-1">Falha Cliente (25 casos):</p>
+                            <p class="text-[10px] text-rose-700 bg-white p-2 rounded">Falha integração, Erro contas a pagar, Boleto não loc.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-800 text-sm uppercase mb-4 border-b pb-2">Produtividade Equipe & SLA</h3>
+                        <p class="text-[10px] text-slate-500 mb-3 border-b border-slate-100 pb-3">Revisão: 18% (452) | SLA: 48h Int / 72h Corresp.<br>Time: 9 pessoas (8 aux, 1 estag - Emanoel entrou 15/05). 2 Mutirões (09 e 16/05).</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-700">
+                            <div><strong class="text-slate-900">Helon (HVR):</strong> 1.887 (Agenda)</div>
+                            <div><strong class="text-slate-900">Cássio (CJS):</strong> 692 (27%)</div>
+                            <div><strong class="text-slate-900">Diogo (DVO):</strong> 393 (15%)</div>
+                            <div><strong class="text-slate-900">Kleber (KTS):</strong> 324 (13%)</div>
+                            <div><strong class="text-slate-900">Assuelio (ALIZ):</strong> 309 (12%)</div>
+                            <div><strong class="text-slate-900">Jefferson (JMS):</strong> 290 (11%)</div>
+                            <div><strong class="text-slate-900">Gustavo (GGS):</strong> 262 (10%)</div>
+                            <div><strong class="text-slate-900">Marly (MAG):</strong> 199 (8%)</div>
+                            <div><strong class="text-slate-900">Emanoel (ERL):</strong> 92 (4%)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 text-center">
+                            <p class="font-bold text-indigo-900 text-xs uppercase mb-2 border-b border-indigo-200 pb-1">Agendas Zeradas</p>
+                            <p class="text-[10px] text-indigo-800">Nubank: 1.075 baixadas</p>
+                            <p class="text-[10px] text-indigo-800">Meli: 812 baixadas</p>
+                            <p class="text-xs font-bold text-emerald-600 mt-2">Pendentes: 0</p>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-center">
+                            <p class="font-bold text-emerald-900 text-xs uppercase mb-2 border-b border-emerald-200 pb-1">Reembolsos Zerados</p>
+                            <p class="text-[10px] text-emerald-800">Meli: 265 solic</p>
+                            <p class="text-[10px] text-emerald-800">Nubank: 24 solic</p>
+                            <p class="text-xs font-bold text-emerald-600 mt-2">Pendentes: 0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 mt-auto">
+        <div class="max-w-[1600px] mx-auto px-4 lg:px-8 flex flex-col md:flex-row justify-between items-center text-slate-400 text-xs font-medium">
+            <p>&copy; 2026 - Controle de Resultados • Controladoria Maio</p>
+            <p class="mt-2 md:mt-0 tracking-widest text-slate-500 bg-slate-800 px-4 py-1 rounded border border-slate-700">DADOS CONFIDENCIAIS</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            // Oculta todas as seções
+            document.querySelectorAll('.section-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Remove a classe active de todos os botões
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('border-slate-700');
+            });
+
+            // Ativa a seção atual
+            const targetSection = document.getElementById(tabId);
+            if (targetSection) targetSection.classList.add('active');
+
+            // Ativa o botão atual
+            const activeBtn = document.getElementById('tab-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+                activeBtn.classList.remove('border-slate-700');
+                
+                // Rolar o menu de abas se necessário no mobile
+                activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+
+            // Scroll para o topo para facilitar a visualização da nova aba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
